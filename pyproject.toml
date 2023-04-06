@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "plugin-template-python"
+version = "0.1.0"
+description = "GatewayD plugin template in Python"
+authors = ["Mostafa Moradian <mostafa@gatewayd.io>"]
+license = "Apache 2.0"
+readme = "README.md"
+packages = [{include = "plugin_template_python"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+grpcio = "^1.53.0"
+black = "^23.3.0"
+grpclib = "^0.4.3"
+
+
+[tool.poetry.group.dev.dependencies]
+grpcio-tools = "^1.53.0"
+grpclib = "^0.4.3"
+protobuf = "^4.22.1"
+pycodestyle = "^2.10.0"
+autopep8 = "^2.0.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
