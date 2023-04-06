@@ -158,10 +158,6 @@ class Plugin(GatewayDPluginServiceBase):
         return remapping
 
 
-async def ping() -> bool:
-    return True
-
-
 async def serve() -> None:
     # Instantiate the plugin.
     plugin = Plugin()
