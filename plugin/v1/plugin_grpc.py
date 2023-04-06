@@ -6,6 +6,7 @@ import typing
 
 import grpclib.const
 import grpclib.client
+
 if typing.TYPE_CHECKING:
     import grpclib.server
 
@@ -14,234 +15,302 @@ import plugin.v1.plugin_pb2
 
 
 class GatewayDPluginServiceBase(abc.ABC):
-
     @abc.abstractmethod
-    async def GetPluginConfig(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def GetPluginConfig(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnConfigLoaded(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnConfigLoaded(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnNewLogger(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnNewLogger(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnNewPool(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnNewPool(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnNewClient(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnNewClient(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnNewProxy(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnNewProxy(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnNewServer(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnNewServer(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnSignal(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnSignal(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnRun(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnRun(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnBooting(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnBooting(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnBooted(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnBooted(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnOpening(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnOpening(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnOpened(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnOpened(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnClosing(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnClosing(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnClosed(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnClosed(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnTraffic(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnTraffic(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnTrafficFromClient(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnTrafficFromClient(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnTrafficToServer(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnTrafficToServer(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnTrafficFromServer(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnTrafficFromServer(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnTrafficToClient(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnTrafficToClient(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnShutdown(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnShutdown(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnTick(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnTick(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     @abc.abstractmethod
-    async def OnHook(self, stream: 'grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]') -> None:
+    async def OnHook(
+        self,
+        stream: "grpclib.server.Stream[google.protobuf.struct_pb2.Struct, google.protobuf.struct_pb2.Struct]",
+    ) -> None:
         pass
 
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
         return {
-            '/plugin.v1.GatewayDPluginService/GetPluginConfig': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/GetPluginConfig": grpclib.const.Handler(
                 self.GetPluginConfig,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnConfigLoaded': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnConfigLoaded": grpclib.const.Handler(
                 self.OnConfigLoaded,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnNewLogger': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnNewLogger": grpclib.const.Handler(
                 self.OnNewLogger,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnNewPool': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnNewPool": grpclib.const.Handler(
                 self.OnNewPool,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnNewClient': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnNewClient": grpclib.const.Handler(
                 self.OnNewClient,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnNewProxy': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnNewProxy": grpclib.const.Handler(
                 self.OnNewProxy,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnNewServer': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnNewServer": grpclib.const.Handler(
                 self.OnNewServer,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnSignal': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnSignal": grpclib.const.Handler(
                 self.OnSignal,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnRun': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnRun": grpclib.const.Handler(
                 self.OnRun,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnBooting': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnBooting": grpclib.const.Handler(
                 self.OnBooting,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnBooted': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnBooted": grpclib.const.Handler(
                 self.OnBooted,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnOpening': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnOpening": grpclib.const.Handler(
                 self.OnOpening,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnOpened': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnOpened": grpclib.const.Handler(
                 self.OnOpened,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnClosing': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnClosing": grpclib.const.Handler(
                 self.OnClosing,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnClosed': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnClosed": grpclib.const.Handler(
                 self.OnClosed,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnTraffic': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnTraffic": grpclib.const.Handler(
                 self.OnTraffic,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnTrafficFromClient': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnTrafficFromClient": grpclib.const.Handler(
                 self.OnTrafficFromClient,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnTrafficToServer': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnTrafficToServer": grpclib.const.Handler(
                 self.OnTrafficToServer,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnTrafficFromServer': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnTrafficFromServer": grpclib.const.Handler(
                 self.OnTrafficFromServer,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnTrafficToClient': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnTrafficToClient": grpclib.const.Handler(
                 self.OnTrafficToClient,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnShutdown': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnShutdown": grpclib.const.Handler(
                 self.OnShutdown,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnTick': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnTick": grpclib.const.Handler(
                 self.OnTick,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
                 google.protobuf.struct_pb2.Struct,
             ),
-            '/plugin.v1.GatewayDPluginService/OnHook': grpclib.const.Handler(
+            "/plugin.v1.GatewayDPluginService/OnHook": grpclib.const.Handler(
                 self.OnHook,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 google.protobuf.struct_pb2.Struct,
@@ -251,143 +320,142 @@ class GatewayDPluginServiceBase(abc.ABC):
 
 
 class GatewayDPluginServiceStub:
-
     def __init__(self, channel: grpclib.client.Channel) -> None:
         self.GetPluginConfig = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/GetPluginConfig',
+            "/plugin.v1.GatewayDPluginService/GetPluginConfig",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnConfigLoaded = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnConfigLoaded',
+            "/plugin.v1.GatewayDPluginService/OnConfigLoaded",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnNewLogger = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnNewLogger',
+            "/plugin.v1.GatewayDPluginService/OnNewLogger",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnNewPool = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnNewPool',
+            "/plugin.v1.GatewayDPluginService/OnNewPool",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnNewClient = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnNewClient',
+            "/plugin.v1.GatewayDPluginService/OnNewClient",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnNewProxy = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnNewProxy',
+            "/plugin.v1.GatewayDPluginService/OnNewProxy",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnNewServer = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnNewServer',
+            "/plugin.v1.GatewayDPluginService/OnNewServer",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnSignal = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnSignal',
+            "/plugin.v1.GatewayDPluginService/OnSignal",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnRun = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnRun',
+            "/plugin.v1.GatewayDPluginService/OnRun",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnBooting = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnBooting',
+            "/plugin.v1.GatewayDPluginService/OnBooting",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnBooted = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnBooted',
+            "/plugin.v1.GatewayDPluginService/OnBooted",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnOpening = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnOpening',
+            "/plugin.v1.GatewayDPluginService/OnOpening",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnOpened = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnOpened',
+            "/plugin.v1.GatewayDPluginService/OnOpened",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnClosing = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnClosing',
+            "/plugin.v1.GatewayDPluginService/OnClosing",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnClosed = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnClosed',
+            "/plugin.v1.GatewayDPluginService/OnClosed",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnTraffic = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnTraffic',
+            "/plugin.v1.GatewayDPluginService/OnTraffic",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnTrafficFromClient = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnTrafficFromClient',
+            "/plugin.v1.GatewayDPluginService/OnTrafficFromClient",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnTrafficToServer = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnTrafficToServer',
+            "/plugin.v1.GatewayDPluginService/OnTrafficToServer",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnTrafficFromServer = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnTrafficFromServer',
+            "/plugin.v1.GatewayDPluginService/OnTrafficFromServer",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnTrafficToClient = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnTrafficToClient',
+            "/plugin.v1.GatewayDPluginService/OnTrafficToClient",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnShutdown = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnShutdown',
+            "/plugin.v1.GatewayDPluginService/OnShutdown",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnTick = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnTick',
+            "/plugin.v1.GatewayDPluginService/OnTick",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
         self.OnHook = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/plugin.v1.GatewayDPluginService/OnHook',
+            "/plugin.v1.GatewayDPluginService/OnHook",
             google.protobuf.struct_pb2.Struct,
             google.protobuf.struct_pb2.Struct,
         )
