@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package plugin.v1;
+
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/gatewayd-io/gatewayd-plugin-sdk/plugin/v1";
+
+service GatewayDPluginService {
+    // GetPluginConfig returns the plugin config upon registration
+    rpc GetPluginConfig (google.protobuf.Struct) returns (google.protobuf.Struct);
+
+    // OnConfigLoaded is called when the config is loaded from any config provider
+    rpc OnConfigLoaded (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnNewLogger (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnNewPool (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnNewClient (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnNewProxy (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnNewServer (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnSignal (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnRun (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnBooting (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnBooted (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnOpening (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnOpened (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnClosing (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnClosed (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnTraffic (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnTrafficFromClient (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnTrafficToServer (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnTrafficFromServer (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnTrafficToClient (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnShutdown (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnTick (google.protobuf.Struct) returns (google.protobuf.Struct);
+    rpc OnHook (google.protobuf.Struct) returns (google.protobuf.Struct); // Custom hook
+}
+
+enum HookName {
+    HOOK_NAME_UNSPECIFIED = 0;
+    HOOK_NAME_ON_CONFIG_LOADED = 1;
+    HOOK_NAME_ON_NEW_LOGGER = 2;
+    HOOK_NAME_ON_NEW_POOL = 3;
+    HOOK_NAME_ON_NEW_CLIENT = 4;
+    HOOK_NAME_ON_NEW_PROXY = 5;
+    HOOK_NAME_ON_NEW_SERVER = 6;
+    HOOK_NAME_ON_SIGNAL = 7;
+    HOOK_NAME_ON_RUN = 8;
+    HOOK_NAME_ON_BOOTING = 9;
+    HOOK_NAME_ON_BOOTED = 10;
+    HOOK_NAME_ON_OPENING = 11;
+    HOOK_NAME_ON_OPENED = 12;
+    HOOK_NAME_ON_CLOSING = 13;
+    HOOK_NAME_ON_CLOSED = 14;
+    HOOK_NAME_ON_TRAFFIC = 15;
+    HOOK_NAME_ON_TRAFFIC_FROM_CLIENT = 16;
+    HOOK_NAME_ON_TRAFFIC_TO_SERVER = 17;
+    HOOK_NAME_ON_TRAFFIC_FROM_SERVER = 18;
+    HOOK_NAME_ON_TRAFFIC_TO_CLIENT = 19;
+    HOOK_NAME_ON_SHUTDOWN = 20;
+    HOOK_NAME_ON_TICK = 21;
+    HOOK_NAME_ON_HOOK = 22;
+}
+
+message PluginID {
+    string name = 1;
+    string version = 2;
+    string remote_url = 3;
+    string checksum = 4;
+}
+
+message PluginConfig {
+    PluginID id = 1;
+    string description = 2;
+    repeated string authors = 3;
+    string license = 4;
+    string project_url = 5;
+    // internal and external config options
+    map<string, string> config = 6;
+    // hooks it attaches to
+    repeated HookName hooks = 7;
+    // required plugins
+    map<string, string> requires = 8;
+    repeated string tags = 9;
+    repeated string categories = 10;
+}
