@@ -1,0 +1,6 @@
+version: v1
+plugins:
+  - name: python
+    out: .
+  - name: python_grpc
+    out: .
