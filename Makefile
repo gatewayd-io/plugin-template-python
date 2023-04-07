@@ -2,7 +2,7 @@ run:
 	@poetry run python main.py
 
 lint:
-	@buf lint
+	@poetry run buf lint
 
 gen:
-	@buf generate
+	@poetry run buf generate
